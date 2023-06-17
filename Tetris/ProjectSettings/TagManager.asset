@@ -41,3 +41,12 @@ TagManager:
   - name: Default
     uniqueID: 0
     locked: 0
+  - name: Background
+    uniqueID: 563421355
+    locked: 0
+  - name: Sekiller
+    uniqueID: 3192717981
+    locked: 0
+  - name: Efektler
+    uniqueID: 56540817
+    locked: 0
