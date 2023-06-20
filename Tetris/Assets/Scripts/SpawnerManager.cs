@@ -8,12 +8,7 @@ public class SpawnerManager : MonoBehaviour
     int randomShape;
 
 
-
-
-
-
-
-    private ShapeManager SpawnShape()
+    internal ShapeManager SpawnShape()
     {
         randomShape = Random.Range(0, allShapes.Length);
         shape = Instantiate(allShapes[randomShape], transform.position, Quaternion.identity) as ShapeManager;
@@ -21,4 +16,5 @@ public class SpawnerManager : MonoBehaviour
         if (shape != null) { return shape; }
         else { print("Hata: Boþ Dizi"); return null; }
     }
+
 }

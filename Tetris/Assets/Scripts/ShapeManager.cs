@@ -1,5 +1,4 @@
 using System.Collections;
-using Unity.VisualScripting;
 using UnityEngine;
 
 public class ShapeManager : MonoBehaviour
@@ -7,32 +6,21 @@ public class ShapeManager : MonoBehaviour
 
     [SerializeField]private bool donebilirmi = true;
 
-    void Start()
-    {
-        //InvokeRepeating("MoveDown",0f,0.25f);
-        InvokeRepeating("RotateLeft", 0f, 2f);
 
-        StartCoroutine(MoveRoutine());
-    }
-
-    void Update()
-    {
-        
-    }
         //Move Functions--------------
-        private void MoveLeft()
+        internal void MoveLeft()
         {
             transform.Translate(Vector3.left,Space.World);
         }
-        private void MoveRight()
+        internal void MoveRight()
         {
             transform.Translate(Vector3.right,Space.World);
         }
-        public void MoveDown()
+        internal void MoveDown()
         {
             transform.Translate(Vector3.down,Space.World);
         }
-        private void MoveUp()
+        internal void MoveUp()
         {
 
             transform.Translate(Vector3.up, Space.World);
@@ -41,14 +29,14 @@ public class ShapeManager : MonoBehaviour
 
 
     //Rotate Functions----------------
-    private void RotateRight()
+    internal void RotateRight()
     {
         if(donebilirmi)
         {
             transform.Rotate(0,0,-90);
         }
     }
-    private void RotateLeft()
+    internal void RotateLeft()
     {
         if (donebilirmi)
         {
