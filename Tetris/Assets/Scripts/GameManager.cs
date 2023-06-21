@@ -1,26 +1,34 @@
 using UnityEngine;
+
 public class GameManager : MonoBehaviour
 {
+    #region Global Variables
     private SpawnerManager spawner;
     private BoardManager board;
     private ShapeManager activeShape;
 
     [Header("Sayaçlar")]
+
     [Range(0.02f, 1f)]
-    [SerializeField]private float downTime = .1f;
+    [SerializeField]
+    private float downTime = .1f;
     private float downSayac;
 
     [Range(0.02f, 1f)]
-    [SerializeField] private float horizonPressTime = 0.25f;
+    [SerializeField]
+    private float horizonPressTime = 0.25f;
     private float horizonPressSayac;
 
     [Range(0.02f, 1f)]
-    [SerializeField] private float verticalRotateTime = 0.25f;
-    private float verticalRotateSayac;
+    [SerializeField]
+    private float rotateTime = 0.25f;
+    private float rotateSayac;
 
     [Range(0.02f, 1f)]
-    [SerializeField] private float downPressTime = 0.25f;
+    [SerializeField] 
+    private float downPressTime = 0.25f;
     private float downPressSayac;
+    #endregion
 
     private void Start()
     {
@@ -38,16 +46,11 @@ public class GameManager : MonoBehaviour
         }
     }
 
-
     private void Update()
     {
         if (!board || !spawner || !activeShape) { return; }
-
         InputControl();
-
-
     }
-
 
     void InputControl()
     {
@@ -59,34 +62,22 @@ public class GameManager : MonoBehaviour
         {
             InputLeft();
         }
-        else if (Input.GetKey("up") && Time.time > verticalRotateSayac)
+        else if (Input.GetKeyDown("up") && Time.time > rotateSayac)
         {
             InputRotate();
         }
-        else if ((Input.GetKey("down") && Time.time > downPressSayac) || Time.time > downPressSayac)
+        else if ((Input.GetKey("down") && Time.time > downPressSayac) || Time.time > downSayac)
         {
-            downSayac = Time.time + downTime;
-            downPressSayac = Time.time + downPressTime;
-
-            if (activeShape)
-            {
-                activeShape.MoveDown();
-
-
-                if (!board.IsLegalPosition(activeShape))
-                {
-                    Yerlesti();
-                }
-
-            }
+            InputDown();
         }
     }
 
-    private void Yerlesti()
+
+    private void Yerlestir()
     {
         horizonPressSayac = Time.time;
         downPressSayac = Time.time;
-        verticalRotateSayac = Time.time;
+        rotateSayac = Time.time;
 
 
         activeShape.MoveUp();
@@ -97,17 +88,19 @@ public class GameManager : MonoBehaviour
         {
             activeShape = spawner.SpawnShape();
         }
+
+        board.RemoveAllLines();
     }
 
     //Ýnputs---------------------
     private void InputRotate()
     {
         activeShape.RotateRight();
-        verticalRotateSayac = Time.time + verticalRotateTime;
+        rotateSayac = Time.time + rotateTime;
 
         if (!board.IsLegalPosition(activeShape))
         {
-            activeShape.MoveLeft();
+            activeShape.MoveRight();
         }
     }
     private void InputLeft()
@@ -128,6 +121,23 @@ public class GameManager : MonoBehaviour
         if (!board.IsLegalPosition(activeShape))
         {
             activeShape.MoveLeft();
+        }
+    }
+    private void InputDown()
+    {
+        downSayac = Time.time + downTime;
+        downPressSayac = Time.time + downPressTime;
+
+        if (activeShape)
+        {
+            activeShape.MoveDown();
+
+
+            if (!board.IsLegalPosition(activeShape))
+            {
+                Yerlestir();
+            }
+
         }
     }
     //---------------------------

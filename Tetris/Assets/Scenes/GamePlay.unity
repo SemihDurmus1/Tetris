@@ -228,9 +228,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 41453eef74dbdc646be062d88a70aa2a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  downTime: 0.25
+  downTime: 0.4
   horizonPressTime: 0.1
-  verticalRotateTime: 0.1
+  rotateTime: 0.1
   downPressTime: 0.1
 --- !u!4 &702749435
 Transform:
