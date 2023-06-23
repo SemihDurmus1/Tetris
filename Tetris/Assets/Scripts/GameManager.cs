@@ -28,6 +28,8 @@ public class GameManager : MonoBehaviour
     [SerializeField] 
     private float downPressTime = 0.25f;
     private float downPressSayac;
+
+    bool gameOver = false;
     #endregion
 
     private void Start()
@@ -48,7 +50,7 @@ public class GameManager : MonoBehaviour
 
     private void Update()
     {
-        if (!board || !spawner || !activeShape) { return; }
+        if (!board || !spawner || !activeShape || gameOver) { return; }
         InputControl();
     }
 
@@ -70,7 +72,7 @@ public class GameManager : MonoBehaviour
         {
             InputDown();
         }
-    }
+    }//Gelen inputlara göre alttaki metotlara götürür
 
 
     private void Yerlestir()
@@ -90,9 +92,9 @@ public class GameManager : MonoBehaviour
         }
 
         board.RemoveAllLines();
-    }
+    }//Yerleþen nesneyi durdurur
 
-    //Ýnputs---------------------
+    //Inputs---------------------
     private void InputRotate()
     {
         activeShape.RotateRight();
@@ -100,9 +102,9 @@ public class GameManager : MonoBehaviour
 
         if (!board.IsLegalPosition(activeShape))
         {
-            activeShape.MoveRight();
+            activeShape.RotateLeft ();
         }
-    }
+    }//Nesneyi çevirir
     private void InputLeft()
     {
         activeShape.MoveLeft();
@@ -135,15 +137,25 @@ public class GameManager : MonoBehaviour
 
             if (!board.IsLegalPosition(activeShape))
             {
-                Yerlestir();
+                if (board.DisariTastiMi(activeShape))
+                {
+                    activeShape.MoveUp();
+                    gameOver = true;
+                }
+                else
+                {
+                    Yerlestir();
+                }
             }
 
         }
     }
     //---------------------------
 
+
+
     Vector2 RoundVector(Vector2 vector)
     {
         return new Vector2(Mathf.Round(vector.x), Mathf.Round(vector.y));
-    }
+    }//Tamsayý garantisi için yuvarlama function
 }

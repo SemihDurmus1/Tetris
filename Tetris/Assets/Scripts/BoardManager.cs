@@ -49,7 +49,7 @@ public class BoardManager : MonoBehaviour
             }
         }
         return true;
-    }
+    }//Sýra dolu mu
     void ExplodeLine(int y)
     {
         for (int x = 0; x < genislik; ++x)
@@ -61,7 +61,7 @@ public class BoardManager : MonoBehaviour
 
             izgara[x,y] = null;
         }
-    }
+    }//Sýrayý patlat
     void DownOneLine(int y)
     {
         for (int x = 0; x < genislik; ++x)
@@ -73,15 +73,14 @@ public class BoardManager : MonoBehaviour
                 izgara[x, y - 1].position += Vector3.down;//Aþaðý indir 
             }
         }
-    }
+    }//Bir sýra aþaðý düþ
     void DownAllLines(int baslangicY)
     {
         for (int i = baslangicY; i < yukseklik; ++i)
         {
             DownOneLine(i);
         }
-    }
-
+    }//Tüm sýralarý düþ
     public void RemoveAllLines()
     {
         for (int y = 0; y < yukseklik; ++y)
@@ -93,7 +92,7 @@ public class BoardManager : MonoBehaviour
                 y--;
             }
         }
-    }
+    }//Tüm sýralarý sil
     //---------------------------
 
 
@@ -101,12 +100,12 @@ public class BoardManager : MonoBehaviour
     bool IsTileFilled(int x, int y, ShapeManager shape)
     {
         return (izgara[x,y] != null && izgara[x,y].parent != shape.transform);
-    }
+    }//Kareler dolu mu
 
     bool IsInBoard(int x, int y)
     {
         return (x >= 0 && x < genislik && y >= 0);
-    }
+    }//Tahtanin icinde mi
 
     public bool IsLegalPosition(ShapeManager shape)
     {
@@ -130,12 +129,26 @@ public class BoardManager : MonoBehaviour
         }
 
         return true;
+    }//Map içinde mi
+
+
+    public bool DisariTastiMi(ShapeManager shape)
+    {
+        foreach (Transform child in shape.transform)
+        {
+            if (child.transform.position.y >= yukseklik - 1)
+            {
+                return true;
+            }
+        }
+
+        return false;
     }
 
     Vector2 RoundVector(Vector2 vector)
     {
         return new Vector2((int)Mathf.Round(vector.x), (int)Mathf.Round(vector.y));
-    }
+    }//Tamsayý garantisi için yuvarlama function
 
     void BosKareleriOlustur()
     {
@@ -151,5 +164,5 @@ public class BoardManager : MonoBehaviour
                 tile.parent = this.transform;
             }
         }
-    }
+    }//Initialize Map
 }
