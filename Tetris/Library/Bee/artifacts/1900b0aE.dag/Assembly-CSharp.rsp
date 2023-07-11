@@ -372,6 +372,7 @@
 "Assets/Scripts/BoardManager.cs"
 "Assets/Scripts/GameManager.cs"
 "Assets/Scripts/ShapeManager.cs"
+"Assets/Scripts/SoundManager.cs"
 "Assets/Scripts/SpawnerManager.cs"
 -langversion:9.0
 

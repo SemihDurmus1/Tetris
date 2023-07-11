@@ -6,14 +6,16 @@ public class BoardManager : MonoBehaviour
 {
     [SerializeField]private Transform tilePrefab;
 
-    [SerializeField] int yukseklik = 22;
-    [SerializeField] int genislik = 10;
+    [SerializeField] int height = 22;
+    [SerializeField] int width = 10;
 
     private Transform[,] izgara;
 
+    public int tamamlananSatir = 0;
+
     private void Awake()
     {
-        izgara = new Transform[genislik, yukseklik];
+        izgara = new Transform[width, height];
     }
 
     private void Start()
@@ -41,7 +43,7 @@ public class BoardManager : MonoBehaviour
     //Line Methods---------------
     bool IsLineFilled(int y)
     {
-        for (int x = 0; x < genislik; ++x)
+        for (int x = 0; x < width; ++x)
         {
             if (izgara[x,y] == null)
             {
@@ -52,7 +54,7 @@ public class BoardManager : MonoBehaviour
     }//Sýra dolu mu
     void ExplodeLine(int y)
     {
-        for (int x = 0; x < genislik; ++x)
+        for (int x = 0; x < width; ++x)
         {
             if (izgara[x,y] != null)
             {
@@ -64,7 +66,7 @@ public class BoardManager : MonoBehaviour
     }//Sýrayý patlat
     void DownOneLine(int y)
     {
-        for (int x = 0; x < genislik; ++x)
+        for (int x = 0; x < width; ++x)
         {
             if (izgara[x, y] != null)
             {
@@ -76,17 +78,19 @@ public class BoardManager : MonoBehaviour
     }//Bir sýra aþaðý düþ
     void DownAllLines(int baslangicY)
     {
-        for (int i = baslangicY; i < yukseklik; ++i)
+        for (int i = baslangicY; i < height; ++i)
         {
             DownOneLine(i);
         }
     }//Tüm sýralarý düþ
     public void RemoveAllLines()
     {
-        for (int y = 0; y < yukseklik; ++y)
+        tamamlananSatir = 0;
+        for (int y = 0; y < height; ++y)
         {
             if (IsLineFilled(y))
             {
+                tamamlananSatir++;
                 ExplodeLine(y);
                 DownAllLines(y+1);
                 y--;
@@ -104,7 +108,7 @@ public class BoardManager : MonoBehaviour
 
     bool IsInBoard(int x, int y)
     {
-        return (x >= 0 && x < genislik && y >= 0);
+        return (x >= 0 && x < width && y >= 0);
     }//Tahtanin icinde mi
 
     public bool IsLegalPosition(ShapeManager shape)
@@ -118,7 +122,7 @@ public class BoardManager : MonoBehaviour
                 return false;
             }
 
-            if (pos.y < yukseklik)
+            if (pos.y < height)
             {
                 if (IsTileFilled((int)pos.x, (int)pos.y, shape))
                 {
@@ -136,7 +140,7 @@ public class BoardManager : MonoBehaviour
     {
         foreach (Transform child in shape.transform)
         {
-            if (child.transform.position.y >= yukseklik - 1)
+            if (child.transform.position.y >= height - 1)
             {
                 return true;
             }
@@ -155,9 +159,9 @@ public class BoardManager : MonoBehaviour
         if(tilePrefab == null) { Debug.Log("Tile Prefab Does not Exist"); return; }
 
 
-        for (int y = 0; y < yukseklik; y++)
+        for (int y = 0; y < height; y++)
         {
-            for (int x = 0; x < genislik; x++)
+            for (int x = 0; x < width; x++)
             {
                 Transform tile = Instantiate(tilePrefab, new Vector3(x, y), Quaternion.identity);
                 tile.name = "x " + x.ToString() + ", " + "y " + y.ToString(); ;
