@@ -7,6 +7,9 @@ public class SoundManager : MonoBehaviour
 {
     public static SoundManager instance;
 
+    public IconManager musicIcon;
+    public IconManager fxIcon;
+
     #region Music Variables
     [SerializeField] private AudioClip[] musicClips;
     [SerializeField] private AudioSource musicSource;
@@ -15,8 +18,8 @@ public class SoundManager : MonoBehaviour
     #endregion
 
     #region FX Variables
-        [SerializeField] private AudioSource[] soundFX;
-        public bool effectPlaying = true;
+    [SerializeField] private AudioSource[] soundFX;
+    public bool effectPlaying = true;
     #endregion
 
     [SerializeField] private AudioSource[] vocalClips;
@@ -88,10 +91,14 @@ public class SoundManager : MonoBehaviour
     {
         musicPlaying = !musicPlaying;
         MusicUpdate();
+
+        musicIcon.IconOpenClose(musicPlaying);
     }
 
     public void FXOpenClose()
     {
         effectPlaying = !effectPlaying;
+
+        fxIcon.IconOpenClose(effectPlaying);
     }
 }

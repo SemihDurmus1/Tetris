@@ -29,7 +29,9 @@ public class GameManager : MonoBehaviour
     private float downPressTime = 0.25f;
     private float downPressSayac;
 
-    bool gameOver = false;
+    public bool gameOver = false;
+
+    public GameObject gameOverPanel;
     #endregion
 
     private void Start()
@@ -45,6 +47,11 @@ public class GameManager : MonoBehaviour
                 activeShape = spawner.SpawnShape();
                 activeShape.transform.position = RoundVector(activeShape.transform.position);
             }
+        }
+
+        if (gameOverPanel)
+        {
+            gameOverPanel.SetActive(false);
         }
     }
 
@@ -96,13 +103,13 @@ public class GameManager : MonoBehaviour
         if (board.tamamlananSatir > 0)
         {
             SoundManager.instance.DoVocalSound(2);
-            if (board.tamamlananSatir > 1)
-            {
-                SoundManager.instance.DoVocalSound(1);
-            }
-            else if (board.tamamlananSatir > 2)
+            if (board.tamamlananSatir > 2)
             {
                 SoundManager.instance.DoVocalSound(0);
+            }
+            else if (board.tamamlananSatir > 1)
+            {
+                SoundManager.instance.DoVocalSound(1);
             }
 
             SoundManager.instance.DoSoundFX(4);
@@ -171,6 +178,13 @@ public class GameManager : MonoBehaviour
                 {
                     activeShape.MoveUp();
                     gameOver = true;
+
+                    if (gameOverPanel)
+                    {
+                        gameOverPanel.SetActive(true);
+                        SoundManager.instance.DoSoundFX(6);
+                    }
+
                     SoundManager.instance.DoSoundFX(5);
                 }
                 else
