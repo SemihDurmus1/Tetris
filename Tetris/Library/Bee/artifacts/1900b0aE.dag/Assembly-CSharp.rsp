@@ -374,6 +374,7 @@
 "Assets/Scripts/BoardManager.cs"
 "Assets/Scripts/GameManager.cs"
 "Assets/Scripts/IconManager.cs"
+"Assets/Scripts/ScoreManager.cs"
 "Assets/Scripts/ScreenFadeManager.cs"
 "Assets/Scripts/ShapeManager.cs"
 "Assets/Scripts/SoundManager.cs"

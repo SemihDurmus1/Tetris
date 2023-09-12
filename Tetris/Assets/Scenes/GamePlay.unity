@@ -472,7 +472,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 5
+  m_text: 0
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: aaf97d8ab241ef44188388f403523549, type: 2}
   m_sharedMaterial: {fileID: 2738864233781359657, guid: aaf97d8ab241ef44188388f403523549, type: 2}
@@ -1304,7 +1304,7 @@ GameObject:
   - component: {fileID: 621660135}
   - component: {fileID: 621660134}
   m_Layer: 5
-  m_Name: lineTxt
+  m_Name: levelTxt
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1350,7 +1350,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 2
+  m_text: 0
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: aaf97d8ab241ef44188388f403523549, type: 2}
   m_sharedMaterial: {fileID: 2738864233781359657, guid: aaf97d8ab241ef44188388f403523549, type: 2}
@@ -1460,6 +1460,8 @@ MonoBehaviour:
   horizonPressTime: 0.1
   rotateTime: 0.1
   downPressTime: 0.1
+  gameOver: 0
+  gameOverPanel: {fileID: 0}
 --- !u!4 &702749435
 Transform:
   m_ObjectHideFlags: 0
@@ -2038,7 +2040,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 200, y: 50}
+  m_SizeDelta: {x: 166, y: 144}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &984347994
 MonoBehaviour:
@@ -2060,7 +2062,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 2500
+  m_text: 0
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: aaf97d8ab241ef44188388f403523549, type: 2}
   m_sharedMaterial: {fileID: 2738864233781359657, guid: aaf97d8ab241ef44188388f403523549, type: 2}
@@ -2087,7 +2089,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 36
+  m_fontSize: 64
   m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 0
@@ -2579,6 +2581,54 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1165902566}
   m_CullTransparentMesh: 1
+--- !u!1 &1178375286
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1178375287}
+  - component: {fileID: 1178375288}
+  m_Layer: 0
+  m_Name: ScoreManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1178375287
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1178375286}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 2021341349}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1178375288
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1178375286}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 56e37f6d5b8248f4b9a9d7f9dcbd2e23, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  seviyedekiSatirSayisi: 5
+  satirText: {fileID: 235378215}
+  levelText: {fileID: 621660134}
+  skorText: {fileID: 984347994}
 --- !u!1 &1355877029
 GameObject:
   m_ObjectHideFlags: 0
@@ -2831,6 +2881,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c898ba4427b886d408cd829a88d68a3a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  musicIcon: {fileID: 0}
+  fxIcon: {fileID: 0}
   musicClips:
   - {fileID: 8300000, guid: ccd47af76d8f774418ff795654f8e9df, type: 3}
   - {fileID: 8300000, guid: bbce750d9d223664b9ef8073c0ace0fb, type: 3}
@@ -4891,6 +4943,7 @@ Transform:
   m_Children:
   - {fileID: 702749435}
   - {fileID: 1373559854}
+  - {fileID: 1178375287}
   m_Father: {fileID: 0}
   m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}

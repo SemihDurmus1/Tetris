@@ -32,12 +32,14 @@ public class GameManager : MonoBehaviour
     public bool gameOver = false;
 
     public GameObject gameOverPanel;
+    private ScoreManager scoreManager;
     #endregion
 
     private void Start()
     {
         board = GameObject.FindObjectOfType<BoardManager>();
         spawner = GameObject.FindObjectOfType<SpawnerManager>();
+        scoreManager = GameObject.FindObjectOfType<ScoreManager>();
 
 
         if (spawner)
@@ -57,7 +59,7 @@ public class GameManager : MonoBehaviour
 
     private void Update()
     {
-        if (!board || !spawner || !activeShape || gameOver) { return; }
+        if (!board || !spawner || !activeShape || gameOver || !scoreManager) { return; }
         InputControl();
     }
 
@@ -102,6 +104,10 @@ public class GameManager : MonoBehaviour
         board.RemoveAllLines();
         if (board.tamamlananSatir > 0)
         {
+
+            scoreManager.SatirSkoru(board.tamamlananSatir);
+
+
             SoundManager.instance.DoVocalSound(2);
             if (board.tamamlananSatir > 2)
             {
